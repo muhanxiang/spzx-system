@@ -3,7 +3,7 @@
 <mapper namespace="com.mhx.spzx.manager.mapper.SysUserMapper">
 
 
-    <select id="selectUserInfoByUserName" resultType="com.mhx.spxz.model.entity.system.SysUser">
+    <select id="selectUserInfoByUserName" resultType="com.mhx.spzx.model.entity.system.SysUser">
         select id,username userName ,password,name,phone,avatar,description,status,create_time,update_time,is_deleted from sys_user where username = #{userName}
     </select>
 </mapper>

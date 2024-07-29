@@ -1,8 +1,7 @@
 package com.mhx.spzx.common.exception;
 
-import com.mhx.spxz.model.vo.common.Result;
-import com.mhx.spxz.model.vo.common.ResultCodeEnum;
-import org.springframework.web.bind.annotation.ControllerAdvice;
+import com.mhx.spzx.model.vo.common.Result;
+import com.mhx.spzx.model.vo.common.ResultCodeEnum;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 

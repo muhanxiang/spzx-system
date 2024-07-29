@@ -2,9 +2,9 @@ package com.mhx.spzx.manager.interceptor;
 
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
-import com.mhx.spxz.model.entity.system.SysUser;
-import com.mhx.spxz.model.vo.common.Result;
-import com.mhx.spxz.model.vo.common.ResultCodeEnum;
+import com.mhx.spzx.model.entity.system.SysUser;
+import com.mhx.spzx.model.vo.common.Result;
+import com.mhx.spzx.model.vo.common.ResultCodeEnum;
 import com.mhx.spzx.utils.AuthContextUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

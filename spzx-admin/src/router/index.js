@@ -39,7 +39,7 @@ import order from './modules/order'
 
 /* 菜单栏的路由 */
 // 固定菜单
-export const fixedRoutes = [...home]
+export const fixedRoutes = [...home,...system]
 // 动态菜单
 export const asyncRoutes = [...system,...product,...order]
 

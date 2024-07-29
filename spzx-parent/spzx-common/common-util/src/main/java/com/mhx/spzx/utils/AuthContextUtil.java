@@ -1,6 +1,6 @@
 package com.mhx.spzx.utils;
 
-import com.mhx.spxz.model.entity.system.SysUser;
+import com.mhx.spzx.model.entity.system.SysUser;
 
 public class AuthContextUtil {
     private static  final ThreadLocal<SysUser> threadLocal=new ThreadLocal<>();

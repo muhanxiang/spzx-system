@@ -1,6 +1,6 @@
 package com.mhx.spzx.manager.mapper;
 
-import com.mhx.spxz.model.entity.system.SysUser;
+import com.mhx.spzx.model.entity.system.SysUser;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

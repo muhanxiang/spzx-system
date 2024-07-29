@@ -1,6 +1,6 @@
 package com.mhx.spzx.common.exception;
 
-import com.mhx.spxz.model.vo.common.ResultCodeEnum;
+import com.mhx.spzx.model.vo.common.ResultCodeEnum;
 import lombok.Getter;
 
 @Getter

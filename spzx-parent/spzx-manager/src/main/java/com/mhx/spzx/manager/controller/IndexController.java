@@ -1,17 +1,15 @@
 package com.mhx.spzx.manager.controller;
 
-import com.mhx.spxz.model.dto.system.LoginDto;
-import com.mhx.spxz.model.entity.system.SysUser;
-import com.mhx.spxz.model.vo.common.Result;
-import com.mhx.spxz.model.vo.common.ResultCodeEnum;
-import com.mhx.spxz.model.vo.system.LoginVo;
-import com.mhx.spxz.model.vo.system.ValidateCodeVo;
+import com.mhx.spzx.model.dto.system.LoginDto;
+import com.mhx.spzx.model.vo.common.Result;
+import com.mhx.spzx.model.vo.common.ResultCodeEnum;
+import com.mhx.spzx.model.vo.system.LoginVo;
+import com.mhx.spzx.model.vo.system.ValidateCodeVo;
 import com.mhx.spzx.manager.service.SysUserService;
 import com.mhx.spzx.manager.service.ValidateCodeService;
 import com.mhx.spzx.utils.AuthContextUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

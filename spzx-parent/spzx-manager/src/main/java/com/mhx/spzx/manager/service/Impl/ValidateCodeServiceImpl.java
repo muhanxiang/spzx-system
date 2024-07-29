@@ -2,7 +2,7 @@ package com.mhx.spzx.manager.service.Impl;
 
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.CircleCaptcha;
-import com.mhx.spxz.model.vo.system.ValidateCodeVo;
+import com.mhx.spzx.model.vo.system.ValidateCodeVo;
 import com.mhx.spzx.manager.service.ValidateCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
