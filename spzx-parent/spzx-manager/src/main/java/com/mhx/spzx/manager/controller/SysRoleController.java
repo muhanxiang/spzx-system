@@ -2,6 +2,7 @@ package com.mhx.spzx.manager.controller;
 
 import com.github.pagehelper.PageInfo;
 import com.mhx.spzx.model.dto.system.SysRoleDto;
+import com.mhx.spzx.model.dto.system.SysUserDto;
 import com.mhx.spzx.model.entity.system.SysRole;
 import com.mhx.spzx.model.vo.common.Result;
 import com.mhx.spzx.model.vo.common.ResultCodeEnum;
@@ -44,5 +45,6 @@ public class SysRoleController {
         sysRoleService.deleteById(roleId);
         return Result.build(null,ResultCodeEnum.SUCCESS);
     }
+
 
 }
