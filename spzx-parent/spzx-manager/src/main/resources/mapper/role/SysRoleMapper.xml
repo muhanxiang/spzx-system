@@ -35,4 +35,8 @@
         </where>
         order by id desc
     </select>
+    <select id="findAll" resultType="com.mhx.spzx.model.entity.system.SysRole">
+        select id,role_name,role_code,description,create_time,update_time,is_deleted
+            from sys_role where is_deleted=0;
+    </select>
 </mapper>

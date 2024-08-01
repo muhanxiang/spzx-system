@@ -4,6 +4,8 @@ import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.mhx.spzx.manager.mapper.SysRoleUserMapper;
+import com.mhx.spzx.model.dto.system.AssginRoleDto;
 import com.mhx.spzx.model.dto.system.LoginDto;
 import com.mhx.spzx.model.dto.system.SysUserDto;
 import com.mhx.spzx.model.entity.system.SysUser;
@@ -12,6 +14,7 @@ import com.mhx.spzx.model.vo.system.LoginVo;
 import com.mhx.spzx.common.exception.BaseException;
 import com.mhx.spzx.manager.mapper.SysUserMapper;
 import com.mhx.spzx.manager.service.SysUserService;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -28,6 +31,8 @@ public class SysUserServiceImpl implements SysUserService {
     private SysUserMapper sysUserMapper;
     @Autowired
     private RedisTemplate<String,String> redisTemplate;
+    @Autowired
+    private SysRoleUserMapper sysRoleUserMapper;
 
     @Override
     public LoginVo login(LoginDto loginDto) {
@@ -90,6 +95,16 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public void deleteById(Long userId) {
         sysUserMapper.delete(userId);
+    }
+
+    @Override
+    @Transactional
+    public void doAssign(AssginRoleDto assginRoleDto) {
+        sysRoleUserMapper.deleteByUserId(assginRoleDto.getUserId());
+        List<Long> roleIdList = assginRoleDto.getRoleIdList();
+        for (Long roleId : roleIdList) {
+            sysRoleUserMapper.doAssign(assginRoleDto.getUserId(),roleId);
+        }
     }
 
     @Override

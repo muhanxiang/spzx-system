@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mhx.spzx.manager.mapper.SysMenuMapper">
+
+    <select id="findAll" resultType="com.mhx.spzx.model.entity.system.SysMenu">
+        select id,parent_id,title,component,sort_value,status,create_time,update_time,is_deleted
+        from sys_menu where is_deleted=0 order by sort_value
+    </select>
+</mapper>

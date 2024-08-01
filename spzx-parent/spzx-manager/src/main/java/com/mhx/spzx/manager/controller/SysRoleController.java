@@ -10,6 +10,8 @@ import com.mhx.spzx.manager.service.SysRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/admin/system/sysRole")
 public class SysRoleController {
@@ -46,5 +48,10 @@ public class SysRoleController {
         return Result.build(null,ResultCodeEnum.SUCCESS);
     }
 
-
+    //查询所有角色
+    @GetMapping("/findAllRoles/{userId}")
+    public Result findAllRoles(@PathVariable("userId") Long userId){
+        Map<String,Object> map=sysRoleService.findAll(userId);
+        return Result.build(map,ResultCodeEnum.SUCCESS);
+    }
 }

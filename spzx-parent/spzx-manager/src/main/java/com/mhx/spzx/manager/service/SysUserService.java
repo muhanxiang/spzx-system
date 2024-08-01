@@ -1,6 +1,7 @@
 package com.mhx.spzx.manager.service;
 
 import com.github.pagehelper.PageInfo;
+import com.mhx.spzx.model.dto.system.AssginRoleDto;
 import com.mhx.spzx.model.dto.system.LoginDto;
 import com.mhx.spzx.model.dto.system.SysUserDto;
 import com.mhx.spzx.model.entity.system.SysUser;
@@ -20,4 +21,6 @@ public interface SysUserService {
     void updateSysUser(SysUser sysUser);
 
     void deleteById(Long userId);
+
+    void doAssign(AssginRoleDto assginRoleDto);
 }
