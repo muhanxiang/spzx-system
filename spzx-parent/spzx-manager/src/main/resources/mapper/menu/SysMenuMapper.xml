@@ -1,9 +1,56 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mhx.spzx.manager.mapper.SysMenuMapper">
+    <insert id="save">
+        insert into sys_menu (
+            id,
+            parent_id,
+            title,
+            component,
+            sort_value,
+            status
+        ) values (
+                     #{id},
+                     #{parentId},
+                     #{title},
+                     #{component},
+                     #{sortValue},
+                     #{status}
+                 )
+    </insert>
+    <update id="update">
+        update sys_menu set
+        <if test="parentId != null and parentId != ''">
+            parent_id = #{parentId},
+        </if>
+        <if test="title != null and title != ''">
+            title = #{title},
+        </if>
+        <if test="component != null and component != ''">
+            component = #{component},
+        </if>
+        <if test="sortValue != null">
+            sort_value = #{sortValue},
+        </if>
+        <if test="status != null">
+            status = #{status},
+        </if>
+        update_time =  now()
+        where
+        id = #{id}
+    </update>
 
     <select id="findAll" resultType="com.mhx.spzx.model.entity.system.SysMenu">
         select id,parent_id,title,component,sort_value,status,create_time,update_time,is_deleted
         from sys_menu where is_deleted=0 order by sort_value
+    </select>
+    <select id="findMenusByUserId" resultType="com.mhx.spzx.model.entity.system.SysMenu">
+select distinct sm.id,parent_id,title,component,sort_value,status,sm.create_time,sm.update_time,sm.is_deleted from
+sys_role_menu srm INNER JOIN sys_user_role sur on sur.user_id=#{userId} and srm.role_id=sur.role_id
+INNER JOIN sys_menu sm on sm.is_deleted=0 and srm.menu_id=sm.id
+    </select>
+    <select id="selectParentMenu" resultType="com.mhx.spzx.model.entity.system.SysMenu">
+        select id,parent_id,title,component,sort_value,status,create_time,update_time,is_deleted
+        from sys_menu where id=#{parentId} and is_deleted=0 order by sort_value
     </select>
 </mapper>

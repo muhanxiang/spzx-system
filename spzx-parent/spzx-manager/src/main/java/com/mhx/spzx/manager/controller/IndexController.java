@@ -1,9 +1,11 @@
 package com.mhx.spzx.manager.controller;
 
+import com.mhx.spzx.manager.service.SysMenuService;
 import com.mhx.spzx.model.dto.system.LoginDto;
 import com.mhx.spzx.model.vo.common.Result;
 import com.mhx.spzx.model.vo.common.ResultCodeEnum;
 import com.mhx.spzx.model.vo.system.LoginVo;
+import com.mhx.spzx.model.vo.system.SysMenuVo;
 import com.mhx.spzx.model.vo.system.ValidateCodeVo;
 import com.mhx.spzx.manager.service.SysUserService;
 import com.mhx.spzx.manager.service.ValidateCodeService;
@@ -12,6 +14,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Tag(name = "用户接口")
 @RestController
@@ -22,6 +26,9 @@ public class IndexController {
 
     @Autowired
     private ValidateCodeService validateCodeService;
+
+    @Autowired
+    private SysMenuService sysMenuService;
 
     //用户登录
     @Operation(summary = "登录的方法")
@@ -53,5 +60,11 @@ public class IndexController {
     public Result logout(@RequestHeader(name="token") String token){
         sysUserService.logout(token);
         return Result.build(null,ResultCodeEnum.SUCCESS);
+    }
+
+    @GetMapping("/menus")
+    public Result menus(){
+        List<SysMenuVo> list=sysMenuService.findMenusByUserId();
+        return Result.build(list,ResultCodeEnum.SUCCESS);
     }
 }
