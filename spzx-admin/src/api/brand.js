@@ -10,6 +10,14 @@ export const GetBrandPageList = (page, limit) => {
   })
 }
 
+export const UpdateBrandById = brand => {
+  return request({
+    url: `${api_name}/updateById`,
+    method: 'put',
+    data: brand,
+  })
+}
+
 // 保存品牌
 export const SaveBrand = brand => {
     return request({
@@ -24,5 +32,13 @@ export const FindAllBrand = () => {
   return request({
     url: `${api_name}/findAll`,
     method: 'get',
+  })
+}
+
+// 根据id删除品牌
+export const DeleteBrandById = id => {
+  return request({
+    url: `${api_name}/deleteById/${id}`,
+    method: 'delete',
   })
 }
