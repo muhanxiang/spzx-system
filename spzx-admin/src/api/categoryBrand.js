@@ -27,3 +27,18 @@ export const FindBrandByCategoryId = categoryId => {
       method: 'get',
     })
 }
+
+export const UpdateCategoryBrandById = categoryBrand => {
+  return request({
+    url: `${api_name}/updateById`,
+    method: 'put',
+    data: categoryBrand,
+  })
+}
+
+export const DeleteCategoryBrandById = id => {
+  return request({
+    url: `${api_name}/deleteById/${id}`,
+    method: 'delete',
+  })
+}

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mhx.spzx.manager.mapper.ProductDetailsMapper">
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into product_details (
+            id,
+            product_id,
+            image_urls,
+            create_time,update_time,is_deleted
+        ) values (
+                     #{id},
+                     #{productId},
+                     #{imageUrls},
+                     now(),
+                     now(),
+                     0
+                 )
+    </insert>
+    <update id="deleteByProductId">
+        update product_details set
+                                   update_time = now() ,
+                                   is_deleted = 1
+        where
+            product_id = #{productId}
+    </update>
+    <update id="updateById">
+        update product_details set
+        <if test="productId != null and productId != ''">
+            product_id = #{productId},
+        </if>
+        <if test="imageUrls != null and imageUrls != ''">
+            image_urls = #{imageUrls},
+        </if>
+        update_time =  now()
+        where
+        id = #{id}
+    </update>
+    <select id="findByProductId" resultType="com.mhx.spzx.model.entity.product.ProductDetails">
+        select
+            id,
+            product_id,
+            image_urls,
+            create_time,update_time,is_deleted
+        from product_details
+        where product_id=#{id} and is_deleted=0
+
+    </select>
+</mapper>

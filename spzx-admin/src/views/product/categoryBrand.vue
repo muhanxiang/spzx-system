@@ -80,13 +80,13 @@
             <img :src="scope.row.logo" width="50" />
         </el-table-column>
         <el-table-column prop="createTime" label="创建时间" />
-        <el-table-column label="操作" align="center" width="200" >
-            <el-button type="primary" size="small" >
-                修改
-            </el-button>
-            <el-button type="danger" size="small">
-                删除
-            </el-button>
+      <el-table-column label="操作" align="center" width="200" #default="scope">
+        <el-button type="primary" size="small" @click="editShow(scope.row)">
+          修改
+        </el-button>
+        <el-button type="danger" size="small" @click="remove(scope.row.id)">
+          删除
+        </el-button>
         </el-table-column>
     </el-table>
 
@@ -105,7 +105,7 @@
 import { ref , onMounted } from 'vue'
 import { FindAllBrand } from '@/api/brand.js'
 import { FindCategoryByParentId } from '@/api/category.js'
-import { GetCategoryBrandPageList,SaveCategoryBrand } from '@/api/categoryBrand.js'
+import { GetCategoryBrandPageList,SaveCategoryBrand,UpdateCategoryBrandById,DeleteCategoryBrandById } from '@/api/categoryBrand.js'
 import { ElMessage, ElMessageBox } from 'element-plus'
 /////////////////////////////////////添加
 const defaultForm = {       //页面表单数据
@@ -138,7 +138,17 @@ const saveOrUpdate = () => {
   categoryBrand.value.categoryId = categoryBrand.value.categoryId[2]
   if (!categoryBrand.value.id) {
     saveData()
-  } 
+  } else {
+    updateData()
+  }
+}
+
+// 修改
+const updateData = async () => {
+  await UpdateCategoryBrandById(categoryBrand.value)
+  dialogVisible.value = false
+  ElMessage.success('操作成功')
+  fetchData()
 }
 
 // 新增
@@ -220,6 +230,29 @@ const fetchData = async () => {
   const { data } = await GetCategoryBrandPageList( pageParams.value.page, pageParams.value.limit, queryDto.value)
   list.value = data.list
   total.value = data.total
+}
+
+//进入修改
+const editShow = row => {
+  categoryBrand.value = row
+  dialogVisible.value = true
+}
+
+//删除
+const remove = async id => {
+  ElMessageBox.confirm('此操作将永久删除该记录, 是否继续?', 'Warning', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+  })
+    .then(async () => {
+      await DeleteCategoryBrandById(id)
+      ElMessage.success('删除成功')
+      fetchData()
+    })
+    .catch(() => {
+      ElMessage.info('取消删除')
+    })
 }
 </script>
 
