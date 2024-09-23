@@ -1,6 +1,8 @@
 package com.mhx.spzx.manager.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.mhx.spzx.common.log.annotation.Log;
+import com.mhx.spzx.common.log.enums.OperatorType;
 import com.mhx.spzx.manager.service.BrandService;
 import com.mhx.spzx.model.entity.product.Brand;
 import com.mhx.spzx.model.vo.common.Result;
@@ -18,6 +20,7 @@ public class BrandController {
     @Autowired
     private BrandService brandService ;
 
+    @Log(title = "品牌管理：列表",businessType = 0,operatorType = OperatorType.OTHER)
     @GetMapping("/{page}/{limit}")
     public Result list(@PathVariable("page") Integer page,
                        @PathVariable("limit") Integer limit){
