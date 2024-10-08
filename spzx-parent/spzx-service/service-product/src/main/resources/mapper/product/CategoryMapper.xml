@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.mhx.spzx.product.mapper.CategoryMapper">
+
+
+    <select id="selectOneCategory" resultType="com.mhx.spzx.model.entity.product.Category">
+        select
+        id,name,image_url,parent_id,status,order_num,create_time,update_time,is_deleted
+        from category
+        where
+        parent_id = 0
+        and status = 1
+        and is_deleted = 0
+        order by order_num
+    </select>
+    <select id="findAll" resultType="com.mhx.spzx.model.entity.product.Category">
+        select
+        id,name,image_url,parent_id,status,order_num,create_time,update_time,is_deleted
+        from category
+        where
+        status = 1
+        and is_deleted = 0
+        order by order_num
+    </select>
+</mapper>

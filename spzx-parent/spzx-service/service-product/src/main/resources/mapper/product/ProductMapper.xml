@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.mhx.spzx.product.mapper.ProductMapper">
+
+    <select id="getById" resultType="com.mhx.spzx.model.entity.product.Product">
+        select
+id,name,brand_id,category1_id,category2_id,category3_id,unit_name,slider_urls,spec_value,status,audit_status,audit_message,create_time,update_time,is_deleted
+        from product
+        where
+        id = #{id}
+    </select>
+</mapper>

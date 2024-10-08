@@ -2,6 +2,7 @@ package com.mhx.spzx.model.vo.h5;
 
 import com.mhx.spzx.model.entity.product.Category;
 import com.mhx.spzx.model.entity.product.ProductSku;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
