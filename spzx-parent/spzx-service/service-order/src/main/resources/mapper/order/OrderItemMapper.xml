@@ -5,4 +5,23 @@
 <mapper namespace="com.mhx.spzx.order.mapper.OrderItemMapper">
 
 
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into order_item (
+            id,
+            order_id,
+            sku_id,
+            sku_name,
+            thumb_img,
+            sku_price,
+            sku_num
+        ) values (
+                     #{id},
+                     #{orderId},
+                     #{skuId},
+                     #{skuName},
+                     #{thumbImg},
+                     #{skuPrice},
+                     #{skuNum}
+                 )
+    </insert>
 </mapper>

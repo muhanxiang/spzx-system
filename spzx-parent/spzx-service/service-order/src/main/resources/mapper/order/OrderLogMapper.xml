@@ -4,5 +4,19 @@
 
 <mapper namespace="com.mhx.spzx.order.mapper.OrderLogMapper">
 
-
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into order_log (
+            id,
+            order_id,
+            operate_user,
+            process_status,
+            note
+        ) values (
+                     #{id},
+                     #{orderId},
+                     #{operateUser},
+                     #{processStatus},
+                     #{note}
+                 )
+    </insert>
 </mapper>

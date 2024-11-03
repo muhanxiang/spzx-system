@@ -18,4 +18,9 @@ public class UserAddressServiceImpl implements UserAddressService {
         Long userId = AuthContextUtil.getUserInfo().getId();
         return addressMapper.findUserAddressList(userId);
     }
+
+    @Override
+    public UserAddress getUserAddress(Long id) {
+        return addressMapper.getUserAddress(id);
+    }
 }

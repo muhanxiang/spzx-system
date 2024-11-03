@@ -12,4 +12,11 @@ id,user_id,name,phone,tag_name,province_code,city_code,district_code,address,ful
         where
         user_id = #{userId}
     </select>
+    <select id="getUserAddress" resultType="com.mhx.spzx.model.entity.user.UserAddress">
+        select
+            id,user_id,name,phone,tag_name,province_code,city_code,district_code,address,full_address,is_default,create_time,update_time,is_deleted
+        from user_address
+        where
+            id = #{id}
+    </select>
 </mapper>
