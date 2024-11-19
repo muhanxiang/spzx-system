@@ -1,5 +1,7 @@
 package com.mhx.spzx.order.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.mhx.spzx.common.exception.BaseException;
 import com.mhx.spzx.feign.cart.CartFeignClient;
 import com.mhx.spzx.feign.product.ProductFeignClient;
@@ -19,6 +21,7 @@ import com.mhx.spzx.order.mapper.OrderItemMapper;
 import com.mhx.spzx.order.mapper.OrderLogMapper;
 import com.mhx.spzx.order.service.OrderInfoService;
 import com.mhx.spzx.utils.AuthContextUtil;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -132,5 +135,52 @@ public class OrderInfoServiceImpl implements OrderInfoService {
         cartFeignClient.deleteChecked();
         //返回订单id
         return orderInfo.getId();
+    }
+
+    @Override
+    public OrderInfo getOrderInfo(Long orderId) {
+        return orderInfoMapper.getById(orderId);
+    }
+
+    //立即购买
+    @Override
+    public TradeVo buy(Long skuId) {
+        //封装订单项集合
+        List<OrderItem> orderItemList=new ArrayList<>();
+        ProductSku productSku = productFeignClient.getBySkuId(skuId);
+        OrderItem orderItem = new OrderItem();
+        orderItem.setSkuId(skuId);
+        orderItem.setSkuNum(1);
+        orderItem.setSkuName(productSku.getSkuName());
+        orderItem.setSkuPrice(productSku.getSalePrice());
+        orderItem.setThumbImg(productSku.getThumbImg());
+        TradeVo tradeVo = new TradeVo();
+        orderItemList.add(orderItem);
+        tradeVo.setOrderItemList(orderItemList);
+        tradeVo.setTotalAmount(productSku.getSalePrice());
+        return tradeVo;
+    }
+
+    @Override
+    public PageInfo<OrderInfo> findOrderPage(Integer page, Integer limit, Integer orderStatus) {
+        PageHelper.startPage(page, limit);
+        //查询订单信息
+        Long userId = AuthContextUtil.getUserInfo().getId();
+        List<OrderInfo> orderInfoList=orderInfoMapper.findUserPage(userId,orderStatus);
+        //查询订单里面所有订单项的数据
+        orderInfoList.forEach(orderInfo -> {
+            List<OrderItem> orderItemList=orderItemMapper.findByOrderId(orderInfo.getId());
+            orderInfo.setOrderItemList(orderItemList);
+        });
+        PageInfo<OrderInfo> pageInfo=new PageInfo<>(orderInfoList);
+        return new PageInfo<>(orderInfoList);
+    }
+
+    @Override
+    public OrderInfo getOrderInfoByOrderNo(String orderNo) {
+        OrderInfo orderInfo= orderInfoMapper.getOrderInfoByOrderNo(orderNo);
+        List<OrderItem> orderItemList = orderItemMapper.findByOrderId(orderInfo.getId());
+        orderInfo.setOrderItemList(orderItemList);
+        return orderInfo;
     }
 }

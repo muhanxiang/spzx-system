@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.mhx.spzx.pay.mapper.PaymentInfoMapper">
+    <insert id="save">
+        insert into payment_info (
+            id,
+            user_id,
+            order_no,
+            pay_type,
+            out_trade_no,
+            amount,
+            content,
+            payment_status,
+            callback_time,
+            callback_content
+        ) values (
+                     #{id},
+                     #{userId},
+                     #{orderNo},
+                     #{payType},
+                     #{outTradeNo},
+                     #{amount},
+                     #{content},
+                     #{paymentStatus},
+                     #{callbackTime},
+                     #{callbackContent}
+                 )
+    </insert>
+
+
+    <select id="getByOrderNo" resultType="com.mhx.spzx.model.entity.pay.PaymentInfo">
+        select
+            id,user_id,order_no,pay_type,out_trade_no,amount,content,payment_status,callback_time,callback_content,create_time,update_time,is_deleted
+        from payment_info
+        where order_no=#{orderNo}
+    </select>
+</mapper>
